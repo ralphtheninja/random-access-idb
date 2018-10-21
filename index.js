@@ -124,7 +124,7 @@ Store.prototype._write = function (req) {
       j += len
     }
     var length = Math.max(self.length || 0, req.offset + req.data.length)
-    store.put(length, self.name + DELIM + "length")
+    store.put(length, self.name + DELIM + 'length')
     store.transaction.addEventListener('complete', function () {
       self.length = length
       req.callback(null)
@@ -155,6 +155,13 @@ Store.prototype._open = function (req) {
         req.callback(null)
       })
     })
+  })
+}
+
+Store.prototype._close = function (req) {
+  this._getdb(function (db) {
+    db.close()
+    req.callback()
   })
 }
 
