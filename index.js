@@ -67,11 +67,11 @@ Store.prototype._read = function (req) {
   var self = this
   var buffers = []
   self._store('readonly', function (err, store) {
-    if ((self.length || 0) < req.offset+req.length) {
+    if ((self.length || 0) < req.offset+req.size) {
       return req.callback(new Error('Could not satisfy length'))
     }
     if (err) return req.callback(err)
-    var offsets = self._blocks(req.offset, req.offset+req.length)
+    var offsets = self._blocks(req.offset, req.offset+req.size)
     var pending = offsets.length + 1
     var firstBlock = offsets.length > 0 ? offsets[0].block : 0
     var j = 0
