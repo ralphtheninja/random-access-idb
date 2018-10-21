@@ -5,7 +5,7 @@ var randombytes = require('randombytes')
 var bequal = require('buffer-equals')
 var balloc = require('buffer-alloc')
 
-test.only('random', function (t) {
+test('random', function (t) {
   var nwrites = 500, nreads = 500
   t.plan(2 + nwrites*2 + nreads)
   var istore = rai('cool.txt')

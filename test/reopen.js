@@ -5,7 +5,7 @@ var randombytes = require('randombytes')
 var bequal = require('buffer-equals')
 var balloc = require('buffer-alloc')
 
-test.only('random', function (t) {
+test('random', function (t) {
   var nwrites = 100, nreads = 100
   t.plan(2 + nwrites*2 + nreads)
 
