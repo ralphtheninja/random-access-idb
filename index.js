@@ -7,12 +7,14 @@ var bufferFrom = require('buffer-from')
 var bufferAlloc = require('buffer-alloc')
 
 var DELIM = '\0'
+var win = typeof window !== 'undefined' ? window
+  : (typeof self !== 'undefined' ? self : {})
 
 module.exports = function (dbname, xopts) {
   if (!xopts) xopts = {}
-  var idb = xopts.idb || (typeof window !== 'undefined'
-    ? window.indexedDB || window.mozIndexedDB
-      || window.webkitIndexedDB || window.msIndexedDB
+  var idb = xopts.idb || (typeof win !== 'undefined'
+    ? win.indexedDB || win.mozIndexedDB
+      || win.webkitIndexedDB || win.msIndexedDB
     : null)
   if (!idb) throw new Error('indexedDB not present and not given')
   var db = null, dbqueue = []
