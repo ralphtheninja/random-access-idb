@@ -115,7 +115,7 @@ Store.prototype._write = function (req) {
       var o = offsets[i]
       var len = o.end - o.start
       if (len === self.size) {
-        block = req.data.slice(j,j+len)
+        block = bufferFrom(req.data.slice(j, j+len))
       } else {
         block = buffers[i]
         req.data.copy(block, o.start, j, j+len)
